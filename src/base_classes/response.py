@@ -1,6 +1,3 @@
-# from jsonschema import validate
-from pydantic import TypeAdapter
-
 from src.enums.global_enums import GlobalEnumMessages
 
 
