@@ -1,15 +1,13 @@
 import requests
 
-from jsonschema import validate
-
 from configuration import SERVICE_URL
 
 from src.base_classes.response import Response
-from src.schemas.item import ITEMS_SCHEMA
+from src.pydantic.item import Item
 
 
 def test_getting_items():
     response = requests.get(url=SERVICE_URL)
     recieved_response = Response(response)
 
-    recieved_response.assert_status_code(200).validate(ITEMS_SCHEMA)
+    recieved_response.assert_status_code(200).validate(Item)
