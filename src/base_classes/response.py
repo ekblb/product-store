@@ -16,16 +16,18 @@ class Response:
             schema.parse_obj(self.response_json)
         return self
 
-
     def assert_status_code(self, status_code):
+        error_message = GlobalEnumMessages.WRONG_STATUS_CODE.value
+
         if isinstance(status_code, list):
-            assert self.response_status in status_code, GlobalEnumMessages.WRONG_STATUS_CODE.value
+            assert self.response_status in status_code, error_message
         else:
-            assert self.response_status == status_code, GlobalEnumMessages.WRONG_STATUS_CODE.value
-        return self
-    
-    #относится к response на Главной странице
-    def assert_numbers_of_items(self):
-        assert len(self.response_json) == 9, GlobalEnumMessages.WRONG_ELEMENTS_NUMBERS.value
+            assert self.response_status == status_code, error_message
         return self
 
+    # относится к response на Главной странице
+    def assert_numbers_of_items(self):
+        error_message = GlobalEnumMessages.WRONG_ELEMENTS_NUMBERS.value
+
+        assert len(self.response_json) == 9, error_message
+        return self

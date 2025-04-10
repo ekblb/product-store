@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Cat(Enum):
     phone = 'phone'
     notebook = 'notebook'
