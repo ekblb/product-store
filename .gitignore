@@ -1,0 +1,66 @@
+# Bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Pip and Poetry files
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Test results
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+.cache
+.pytest_cache/
+nosetests.xml
+test-results/
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# dotenv
+.env
+.env.*
+
+# MyPy / Pyright / Type checkers
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# VS Code debug files
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# Profiling
+.prof
+
+# Local test scripts or config
+*.local
+
+#My files
+allureress/
