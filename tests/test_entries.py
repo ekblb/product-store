@@ -11,3 +11,12 @@ def test_getting_items(get_items):
 @pytest.mark.skip('test skipping')
 def test_for_skip():
     print('need to skip')
+
+
+@pytest.mark.development
+@pytest.mark.parametrize('first_value, second_value, result', [
+    (1, 2, 3), (-1, 3, 2), ('a', 3, None)
+        ])
+def test_funtion_in_fixture(first_value, second_value, result,
+                            function_fixture):
+    assert function_fixture(first_value, second_value) == result
