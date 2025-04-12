@@ -2,6 +2,7 @@ import pytest
 import requests
 
 from configuration import SERVICE_URL
+from src.generators.message import Message
 
 
 @pytest.fixture
@@ -20,3 +21,8 @@ def function(a, b):
 @pytest.fixture
 def function_fixture():
     return function
+
+
+@pytest.fixture
+def get_message_generator():
+    return Message()
