@@ -1,4 +1,4 @@
-from .fakes import EmailFake
+from .fakes import EmailFake, NameFake, TextFake
 
 
 class Message:
@@ -7,16 +7,18 @@ class Message:
         self.result = {}
         self.reset()
 
-    def set_email(self):
-        self.result['email'] = EmailFake().build()
+    def set_email(self, email='test_mail'):
+        email = EmailFake().build()
+        self.result['email'] = email
         return self
 
-    def set_name(self):
-        name = 'test_name'
+    def set_name(self, name='test_name'):
+        name = NameFake().build()
         self.result['name'] = name
         return self
 
-    def set_text(self, text='test_message'):
+    def set_text(self, text='test_text'):
+        text = TextFake().build()
         self.result['text'] = text
         return self
 

@@ -33,13 +33,15 @@ def test_function_in_fixture(first_value, second_value, result,
 
 
 @pytest.mark.parametrize(
-        'text_in_message', ['Small message', '', None]
+        'text_in_message', ['mes', '', None]
         )
 def test_generator_messages(text_in_message, get_message_generator):
     """
     Try to use generator in test
     """
-    print(get_message_generator.set_text(text_in_message).build())
+    message_different_text = get_message_generator.build()
+    message_different_text['text'] = text_in_message
+    print(message_different_text)
 
 
 @pytest.mark.parametrize(
