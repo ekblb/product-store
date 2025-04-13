@@ -25,8 +25,9 @@ class NameFake(Fake):
         self.result = self.fake.name()
 
 
-class TextFake(Fake):
+# class TextFake(Fake):
 
-    def __init__(self):
-        super().__init__()
-        self.result = self.fake.text()
+#     def __init__(self, lang):
+#         super().__init__()
+#         self.fake = Faker(lang)
+#         self.result = self.fake.text()

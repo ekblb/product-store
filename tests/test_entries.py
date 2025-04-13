@@ -2,6 +2,7 @@ import pytest
 
 from src.base_classes.response import Response
 from src.pydantic.item import Item
+from src.generators.text_language import TextLocalization
 
 
 def test_getting_items(get_items):
@@ -33,19 +34,19 @@ def test_function_in_fixture(first_value, second_value, result,
 
 
 @pytest.mark.parametrize(
-        'text_in_message', ['mes', '', None]
+        'name_in_message', ['Katya', '', None]
         )
-def test_generator_messages(text_in_message, get_message_generator):
+def test_generator_messages(name_in_message, get_message_generator):
     """
     Try to use generator in test
     """
-    message_different_text = get_message_generator.build()
-    message_different_text['text'] = text_in_message
-    print(message_different_text)
+    name_different_text = get_message_generator.build()
+    name_different_text['name'] = name_in_message
+    print(name_different_text)
 
 
 @pytest.mark.parametrize(
-        'delete_key', ['email', 'name', 'text']
+        'delete_key', ['email', 'name', 'message']
         )
 def test_messages_without_key(delete_key, get_message_generator):
     """
@@ -54,3 +55,18 @@ def test_messages_without_key(delete_key, get_message_generator):
     message_without_key = get_message_generator.build()
     del message_without_key[delete_key]
     print(message_without_key)
+
+
+@pytest.mark.parametrize(
+        "language_message, language_generator", [
+            ('en', 'en_US'), ('ru', 'ru_RU')
+            ])
+def test_generation_for_deep_objects(language_message, language_generator,
+                                     get_message_generator):
+    """
+    Try to update values only in deep objects
+    """
+    message_update_deep_params = get_message_generator.update_deep_params(
+        ['message', language_message],
+        TextLocalization(language_generator).build()).build()
+    print(message_update_deep_params)

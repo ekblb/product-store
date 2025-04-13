@@ -1,10 +1,24 @@
-from .fakes import EmailFake, NameFake, TextFake
+from .fakes import EmailFake, NameFake
+# from .text_language import TextLanguage
+
+from src.base_classes.builder import Builder
+from src.generators.text_language import TextLocalization
 
 
-class Message:
+# self.result=
+# {
+# "email": "test@mail.ru",
+# "name": "test_name",
+# "message": {
+#               "en": {"text": "text_message"},
+#               "ru": {"text": "текст_сообщения"},
+#            }
+
+
+class Message(Builder):
 
     def __init__(self):
-        self.result = {}
+        super().__init__()
         self.reset()
 
     def set_email(self, email='test_mail'):
@@ -17,16 +31,11 @@ class Message:
         self.result['name'] = name
         return self
 
-    def set_text(self, text='test_text'):
-        text = TextFake().build()
-        self.result['text'] = text
-        return self
-
     def reset(self):
         self.set_email()
         self.set_name()
-        self.set_text()
+        self.result['message'] = {
+              "en": TextLocalization('en_US').build(),
+              "ru": TextLocalization('ru_RU').build()
+        }
         return self
-
-    def build(self):
-        return self.result
