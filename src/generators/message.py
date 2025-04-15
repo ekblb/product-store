@@ -9,6 +9,7 @@ from src.generators.text_language import TextLocalization
 # {
 # "email": "test@mail.ru",
 # "name": "test_name",
+# "status": "test_status",
 # "message": {
 #               "en": {"text": "text_message"},
 #               "ru": {"text": "текст_сообщения"},
@@ -31,9 +32,14 @@ class Message(Builder):
         self.result['name'] = name
         return self
 
+    def set_status(self, status="test_status"):
+        self.result['status'] = status
+        return self
+
     def reset(self):
         self.set_email()
         self.set_name()
+        self.set_status()
         self.result['message'] = {
               "en": TextLocalization('en_US').build(),
               "ru": TextLocalization('ru_RU').build()

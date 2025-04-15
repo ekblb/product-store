@@ -1,7 +1,8 @@
 from enum import Enum
+from pyenums import PyEnum
 
 
-class Cat(Enum):
+class Cat(PyEnum):
     phone = 'phone'
     notebook = 'notebook'
     monitor = 'monitor'

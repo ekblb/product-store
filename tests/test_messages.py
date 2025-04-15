@@ -1,36 +1,7 @@
 import pytest
 
-from src.base_classes.response import Response
-from src.pydantic.item import Item
 from src.generators.text_language import TextLocalization
-
-
-def test_getting_items(get_items):
-    """
-    Getting list of items
-    """
-    Response(get_items).assert_status_code(200).validate(Item)
-
-
-@pytest.mark.skip('test skipping')
-def test_for_skip():
-    """
-    Try to skip the test
-    """
-    print('need to skip')
-
-
-@pytest.mark.development
-@pytest.mark.parametrize(
-    'first_value, second_value, result', [
-        (1, 2, 3), (-1, 3, 2), ('a', 3, None)
-        ])
-def test_function_in_fixture(first_value, second_value, result,
-                             function_fixture):
-    """
-    Try to use various parameters within one test
-    """
-    assert function_fixture(first_value, second_value) == result
+from src.enums.message_enums import Status, MessageFields
 
 
 @pytest.mark.parametrize(
@@ -46,7 +17,7 @@ def test_generator_messages(name_in_message, get_message_generator):
 
 
 @pytest.mark.parametrize(
-        'delete_key', ['email', 'name', 'message']
+        'delete_key', [*MessageFields.list()]
         )
 def test_messages_without_key(delete_key, get_message_generator):
     """
@@ -70,3 +41,8 @@ def test_generation_for_deep_objects(language_message, language_generator,
         ['message', language_message],
         TextLocalization(language_generator).build()).build()
     print(message_update_deep_params)
+
+
+@pytest.mark.parametrize("status_params", [*Status.list()])
+def test_pydantic_in_parametrize(status_params, get_message_generator):
+    print(get_message_generator.set_status(status_params).build())
